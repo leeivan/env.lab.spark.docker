@@ -1,0 +1,24 @@
+class MyPartitioner extends org.apache.spark.Partitioner {
+  //定义分区数为2
+  def numPartitions: Int = 2
+
+  //如果键为2则分区编号为0，其他键的分区编号为1
+  def getPartition(key: Any): Int = {
+    key match {
+      case null => 0
+      case 2 => 0
+      case _ => numPartitions - 1
+    }
+  }
+
+  override def equals(other: Any): Boolean = {
+    other match {
+      case h: MyPartitioner => true
+      case _ => false
+    }
+  }
+}
+
+
+
+
